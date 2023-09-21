@@ -1,6 +1,8 @@
 const pool = require("../db");
-const {v4: uuidv4} = require("uuid");
+const uuid = require('uuid')
 const ApiError = require('../error/ApiError');
+const path = require("path");
+
 class HeroesController {
     async getAllHeroes(req, res){
         try{
@@ -12,14 +14,22 @@ class HeroesController {
     }
     async addHero(req, res, next){
         try{
-            const {nickname, real_name, origin, superpowers, phrase, images} = req.body
-            const id = uuidv4()
+            const {nickname, real_name, origin, superpowers, phrase} = req.body
+            const id = uuid.v4()
+            const {images} = req.files;
+            const pathArray = images.map(image=>{
+                const fileName = uuid.v4() + '.jpg'
+                const imagesPath = path.resolve(__dirname, '..', 'static', fileName)
+                image.mv(imagesPath)
+                return imagesPath
+            })
+            console.log(pathArray)
 
             if(!nickname || !real_name || !origin || !superpowers || !phrase || !images) {
                 return next(ApiError.badRequest('Incorrect data in request'))
             }
 
-            const newHero = await pool.query(`INSERT INTO heroes(id, nickname, real_name, origin, superpowers, phrase, images) VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, nickname, real_name, origin, superpowers, phrase, images]);
+            const newHero = await pool.query(`INSERT INTO heroes(id, nickname, real_name, origin, superpowers, phrase, images) VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, nickname, real_name, origin, superpowers, phrase, pathArray]);
 
             if (!newHero) {
                 return next(ApiError.internal('Hero was not created, something went wrong'))
