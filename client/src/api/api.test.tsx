@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {api} from './api';
-import {IHero} from "../types/types";
+import {IHero} from "../types/hero";
 
 jest.mock('axios')
 

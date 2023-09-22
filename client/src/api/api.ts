@@ -1,5 +1,5 @@
 import axios from "axios";
-import {IHero} from "../types/types";
+import {IHero} from "../types/hero";
 axios.defaults.baseURL = 'http://localhost:8000';
 export const api = {
 
