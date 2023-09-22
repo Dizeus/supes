@@ -1,13 +1,12 @@
 import axios from "axios";
 import {IHero} from "../types/hero";
-axios.defaults.baseURL = 'http://localhost:8000';
 export const api = {
 
     async getHeroes() {
         try {
             const response = await axios.get<IHero[]>('/api/heroes')
             console.log(response.data)
-            return response.data
+            return response
         } catch (err) {
             console.error(err)
         }

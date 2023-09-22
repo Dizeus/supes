@@ -4,7 +4,7 @@ import {IHero} from "../types/hero";
 
 jest.mock('axios')
 
-describe('getData', () => {
+describe('test apis', () => {
     let response: {data: IHero[]};
     beforeEach(() => {
         response = {
