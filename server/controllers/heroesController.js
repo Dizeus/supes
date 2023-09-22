@@ -21,7 +21,7 @@ class HeroesController {
                 const fileName = uuid.v4() + '.jpg'
                 const imagesPath = path.resolve(__dirname, '..', 'static', fileName)
                 image.mv(imagesPath)
-                return imagesPath
+                return fileName
             })
             console.log(pathArray)
 
