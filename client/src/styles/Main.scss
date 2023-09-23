@@ -1,5 +1,10 @@
 .main{
-  padding: 20px;
-  display: flex;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
   gap: 30px;
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
 }

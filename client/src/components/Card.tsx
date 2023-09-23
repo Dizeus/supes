@@ -1,21 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {IHero} from "../types/hero";
 import '../styles/Card.scss'
+import BackCard from "./BackCard";
+import FrontCard from "./FrontCard";
 interface CardProps{
     hero: IHero;
 }
 const Card: React.FC<CardProps> = ({hero}) => {
+
+    const [active, setActive] = useState(false)
     return (
         <div className="card">
-            <img className='card__img'
-                src={hero.images[0]}
-                alt=""/>
-            <div className="card__content">
-                <h2 className='card__title'>{hero.nickname}</h2>
-                <p className='card__text'>{hero.phrase}</p>
-                 <a href="#" className="card__link">
-                    Find out more
-                 </a>
+            <div className={`card__body${active?' card__body_active':''}`}>
+                    <FrontCard hero={hero} setActive={setActive}/>
+                    <BackCard hero={hero} setActive={setActive}/>
             </div>
         </div>
     );
