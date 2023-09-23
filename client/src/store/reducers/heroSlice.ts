@@ -1,4 +1,4 @@
-import {HeroAction, IHero} from "../../types/hero";
+import {IHero} from "../../types/hero";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface HeroState {

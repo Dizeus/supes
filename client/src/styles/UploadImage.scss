@@ -1,0 +1,116 @@
+
+.img{
+  position: relative;
+  height: 100%;
+  border-radius: 20px;
+  background-color: white;
+  padding: 100px 20px;
+  font-size: 20px;
+  text-align: center;
+
+  &__close{
+    color: lightcoral;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: skyblue;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out 0s;
+    &:hover{
+      background-color: lightcoral;
+      color: #FFF;
+    }
+  }
+  &__title{
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  &__subtitle{
+    color: grey;
+    line-height: 150%;
+    margin-bottom: 40px;
+    a{
+      color: lightcoral;
+    }
+  }
+  &__dropbox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed lightgrey;
+    border-radius: 20px;
+    height: 320px;
+    margin-bottom: 20px;
+    background: skyblue url('../assets/images/upload-bg.svg') center center no-repeat;
+    &_error{
+      background-color: lightgrey;
+      border-color: lightcoral;
+    }
+  }
+  &__instruction{
+    color: grey;
+    line-height: 150%;
+    span{
+      color: black;
+      font-weight: 500;
+    }
+  }
+  &__previewContainer{
+    width: 640px;
+    height: 320px;
+    padding: 20px 40px;
+  }
+  &__preview{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+  &__files{
+    color: grey;
+    line-height: 150%;
+    margin-bottom: 20px;
+  }
+  &__upload, &__uploading{
+    background-color: lightcoral;
+    text-transform: uppercase;
+    border-radius: 10px;
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    line-height: 133%;
+    transition: all 0.2s ease-in-out 0s;
+    margin-bottom: 10px;
+    &:hover{
+      background-color: lightgrey;
+      color: lightcoral;
+    }
+  }
+  &__uploading{
+    display: inline-flex;
+    column-gap: 10px;
+    background-color: lightgrey;
+  }
+  &__result{
+    padding: 20px;
+    text-align: left;
+    background-color: skyblue;
+    border-radius: 10px;
+    width: 100%;
+    span{
+      color: grey;
+      margin-left: 5px;
+    }
+  }
+}
+
+.hidden{
+  display: none;
+}

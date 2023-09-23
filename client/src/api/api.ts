@@ -1,5 +1,6 @@
 import axios from "axios";
-import {IHero} from "../types/hero";
+import {IHero, IHeroSend} from "../types/hero";
+import {heroSlice} from "../store/reducers/heroSlice";
 export const api = {
 
     async getHeroes() {
@@ -10,9 +11,9 @@ export const api = {
             console.error(err)
         }
     },
-    async addHero(hero: any) {
+    async addHero(hero: FormData) {
         try {
-            const response = await axios.post<IHero>('/api/heroes', hero)
+            const response = await axios.post<IHero>('/api/heroes', hero, {headers: {"Content-Type": "multipart/form-data"}},)
             console.log(response.data)
             return response
         } catch (err) {

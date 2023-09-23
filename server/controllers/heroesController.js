@@ -14,16 +14,24 @@ class HeroesController {
     }
     async addHero(req, res, next){
         try{
-            const {nickname, real_name, origin, superpowers, phrase} = req.body
             const id = uuid.v4()
-            const {images} = req.files;
-            const pathArray = images.map(image=>{
+            const {images} = req.files
+            const {nickname, real_name, origin, superpowers, phrase} = req.body;
+
+            let pathArray = []
+            if(images.length > 1){
+                pathArray = images.map(image=>{
+                    const fileName = uuid.v4() + '.jpg'
+                    const imagesPath = path.resolve(__dirname, '..', 'static', fileName)
+                    image.mv(imagesPath)
+                    return fileName
+                })
+            }else{
                 const fileName = uuid.v4() + '.jpg'
+                pathArray[0] = fileName
                 const imagesPath = path.resolve(__dirname, '..', 'static', fileName)
-                image.mv(imagesPath)
-                return fileName
-            })
-            console.log(pathArray)
+                images.mv(imagesPath)
+            }
 
             if(!nickname || !real_name || !origin || !superpowers || !phrase || !images) {
                 return next(ApiError.badRequest('Incorrect data in request'))

@@ -1,0 +1,56 @@
+.modal{
+  display: none;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding-top: 50px;
+  &_active{
+    display: block;
+  }
+  &__form{
+    background-color: white;
+    position: relative;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+  }
+  &__body{
+    display: flex;
+  }
+  &__inputs{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+  }
+  &__images{
+    flex: 0 1 50%;
+  }
+  &__dropbox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed lightgrey;
+    border-radius: 20px;
+    height: 320px;
+    margin-bottom: 20px;
+    background: skyblue url('../assets/images/upload-bg.svg') center center no-repeat;
+  }
+  &__close{
+    position: absolute;
+    font-size: 30px;
+    background-color: transparent;
+    right: 3%;
+  }
+  &__submit{
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+  &__hidden{
+    display: none;
+  }
+}
