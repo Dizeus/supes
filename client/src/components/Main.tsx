@@ -7,10 +7,10 @@ import '../styles/Main.scss'
 
 const Main = () => {
 
-    const {heroes} = useTypedSelector(state=>state)
+    const {heroes} = useTypedSelector(state=>state.heroReducer)
 
     return (
-        <div className='main'>
+        <div data-testid='main' className='main'>
             {heroes.map(hero=><Card key={hero.id} hero={hero}/>)}
         </div>
     );

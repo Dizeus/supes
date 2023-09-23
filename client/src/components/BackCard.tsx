@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {IHero} from "../types/hero";
 import '../styles/BackCard.scss';
-
+import del from '../assets/icons/delete.svg';
+import edit from '../assets/icons/edit.svg';
+import ret from '../assets/icons/return.svg';
 interface BackCardProps{
     hero: IHero,
     setActive: (active: boolean) => void
@@ -10,11 +12,14 @@ const BackCard: React.FC<BackCardProps> = ({hero, setActive}) => {
     const [slide, setSlide] = useState<number>(0)
     return (
         <div className="card__back back">
-            <button onClick={()=>setActive(false)} className='myButton myButton_card'>&#x2190;</button>
+
             <button disabled={slide===0} className='back__prev' onClick={()=>setSlide(slide-1)}>&#x2039;</button>
             <button disabled={slide===hero.images.length-1} className='back__next' onClick={()=>setSlide(slide+1)}>&#x203A;</button>
-
-
+            <div className='back__buttons'>
+                <img onClick={()=>setActive(false)} src={ret} className='back_return'/>
+                <img src={edit} className='back_edit'/>
+                <img src={del} className='back_delete'/>
+            </div>
             <img className='back__img' src={hero.images[slide]} alt="hero"/>
             <div className="back__content">
                 <h2 className='back__title'>{hero.nickname}</h2>

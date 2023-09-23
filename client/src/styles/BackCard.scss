@@ -59,6 +59,26 @@
     top: 50%;
     font-weight: 800;
   }
+  &__buttons{
+    position: absolute;
+    display: flex;
+    right: -2%;
+    top: -2%;
+    column-gap: 5px;
+    img{
+      cursor: pointer;
+      background-color: white;
+      border: 2px solid black;
+      padding: 5px;
+      width: 35px;
+      &:hover{
+        background-color: #d4d4d4;
+      }
+    }
+  }
+  &__edit{
+
+  }
   &__prev{
     left: -2%;
     transform: translate(0, -50%);

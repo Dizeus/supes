@@ -1,7 +1,6 @@
 import React from 'react';
 import {IHero} from "../types/hero";
 import '../styles/FrontCard.scss'
-import Button from "../UI/Button";
 interface FrontCardProps{
     hero: IHero,
     setActive: (active: boolean) => void

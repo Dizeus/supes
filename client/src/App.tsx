@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Header from "./components/Header";
 import './styles/App.scss'
 import Main from "./components/Main";
-import {useActions} from "./hooks/useAction";
-import {useTypedSelector} from "./hooks/useTypedSelector";
+import {getHeroes} from "./store/reducers/heroActionCreators";
+import {useTypedDispatch} from "./hooks/useTypedDispatch";
 function App() {
-    const {getHeroes} = useActions()
 
+
+    const dispatch = useTypedDispatch()
     useEffect(()=>{
-        getHeroes()
+        dispatch(getHeroes())
     },[])
 
     return (
