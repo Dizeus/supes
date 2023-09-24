@@ -11,7 +11,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.static(root));
-app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(express.static(path.resolve(__dirname, '../client/public/images')))
+
 if(process.env.NODE_ENV == "production"){
     app.use(express.static(root))
 }
