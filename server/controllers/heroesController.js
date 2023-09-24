@@ -6,10 +6,10 @@ const path = require("path");
 function saveImages(pathArray, images){
     (images.length?[...images]:[images]).map(async (image)=>{
         const fileName = uuid.v4() + '.jpg'
-        await image.mv(path.resolve(__dirname, '../../client/public/images') + '\\'+ fileName)
-        console.log(path.resolve(__dirname, '../../client/public/images') + '\\'+ fileName)
+        await image.mv(path.resolve(__dirname, '../../client/build/images') + '\\'+ fileName)
+        console.log(path.resolve(__dirname, '../../client/build/images') + '\\'+ fileName)
         console.log(fileName)
-        pathArray.push(path.resolve(__dirname, '../../client/public/images') + '\\'+ fileName)
+        pathArray.push(path.resolve(__dirname, '../../client/build/images') + '\\'+ fileName)
     })
     return pathArray
 }
