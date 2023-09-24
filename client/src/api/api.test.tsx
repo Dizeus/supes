@@ -22,7 +22,7 @@ describe('test apis', () => {
     })
     test('correct response', async () => {
         (axios.get as jest.Mock).mockReturnValue(response);
-        const data = await api.getHeroes()
+        const data = await api.getHeroes(1)
         expect(axios.get).toBeCalledTimes(1);
         expect(data).toEqual(response.data);
     })

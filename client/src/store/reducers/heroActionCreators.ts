@@ -1,12 +1,13 @@
 import {api} from "../../api/api";
 import {AppDispatch} from "../store";
-import {setHeroes, addHero, deleteHero, updateHero} from "./heroSlice";
+import {setHeroes, addHero, deleteHero, updateHero, setTotalPages} from "./heroSlice";
 
-export const getHeroes = () => async (dispatch: AppDispatch) =>{
+export const getHeroes = (page: number) => async (dispatch: AppDispatch) =>{
     try {
-        const response = await api.getHeroes()
+        const response = await api.getHeroes(page)
         if(response?.status == 200){
-            dispatch(setHeroes(response.data.reverse()))
+            dispatch(setHeroes(response.data.heroes))
+            dispatch(setTotalPages(Math.ceil(response.data.rows/5)))
         }
     } catch (e) {
         console.error(e)

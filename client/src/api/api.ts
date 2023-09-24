@@ -3,9 +3,9 @@ import {IHero, IHeroSend} from "../types/hero";
 import {heroSlice} from "../store/reducers/heroSlice";
 export const api = {
 
-    async getHeroes() {
+    async getHeroes(page: number) {
         try {
-            const response = await axios.get<IHero[]>('/api/heroes')
+            const response = await axios.get<{heroes: IHero[], rows:number}>(`/api/heroes/${page}`)
             return response
         } catch (err) {
             console.error(err)

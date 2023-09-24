@@ -4,6 +4,11 @@
   height: 34rem;
   background-color: transparent;
   perspective: 1000px;
+  transition: all 0.3s ease 0s;
+
+  &:hover{
+    transform: scale(1.05);
+  }
 
   &__body {
     background: linear-gradient(to top, #f7c264, #f7e8c7);

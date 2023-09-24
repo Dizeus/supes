@@ -5,12 +5,17 @@ interface HeroState {
     heroes: IHero[];
     modal: string;
     currentHero: IHero | null;
+    totalPages: number;
+    page: number
+
 }
 
 const initialState: HeroState = {
     heroes: [],
     modal: 'none',
-    currentHero: null
+    currentHero: null,
+    totalPages: 0,
+    page: 1,
 }
 
 export const heroSlice = createSlice({
@@ -34,9 +39,15 @@ export const heroSlice = createSlice({
         },
         setCurrentHero(state,action: PayloadAction<IHero | null> ){
             state.currentHero = action.payload
+        },
+        setTotalPages(state,action: PayloadAction<number> ){
+            state.totalPages = action.payload
+        },
+        setPage(state,action: PayloadAction<number> ){
+            state.page = action.payload
         }
     }
 })
 
-export const {addHero, updateHero, setHeroes, deleteHero, setModal, setCurrentHero} = heroSlice.actions
+export const {addHero, updateHero, setHeroes, deleteHero, setModal, setCurrentHero, setPage, setTotalPages} = heroSlice.actions
 export default heroSlice.reducer;

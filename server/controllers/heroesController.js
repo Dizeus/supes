@@ -16,8 +16,11 @@ class HeroesController {
 
     async getAllHeroes(req, res){
         try{
-            const heroes = await pool.query(`SELECT * FROM heroes`);
-            return res.json(heroes.rows)
+            const page = req.params.id
+            let offset = page * 5 - 5
+            const heroes = await pool.query(`SELECT * FROM heroes ORDER BY heroes.id DESC LIMIT 5 OFFSET $1;`, [offset]);
+            const count = await pool.query(` SELECT count(*) FROM heroes;`);
+            return res.json({heroes: heroes.rows, rows: count.rows[0].count})
         }catch (error){
             console.error(error)
         }

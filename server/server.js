@@ -18,7 +18,7 @@ if(process.env.NODE_ENV == "production"){
 app.use(fileUpload({}))
 app.use(errorHandler)
 
-app.get('/api/heroes', heroController.getAllHeroes)
+app.get('/api/heroes/:id', heroController.getAllHeroes)
 app.post('/api/heroes', heroController.addHero)
 app.put('/api/heroes', heroController.editHero)
 app.delete('/api/heroes/:id', heroController.deleteHero)

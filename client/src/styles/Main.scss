@@ -1,10 +1,32 @@
 .main{
   padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
-  gap: 30px;
-  justify-content: space-evenly;
-  justify-items: center;
-  align-content: space-evenly;
-  align-items: center;
+  background: radial-gradient(rgba(247, 232, 199, 0.59), #f7e8c7), url('../assets/images/background.jpg') top center/100% 100% no-repeat fixed;
+  &__pagination{
+    margin-bottom: 20px;
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+  }
+  &__page{
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: black;
+    border: 2px solid black;
+    &_active{
+      background-color: #f7c264;
+    }
+  }
+
+  &__cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+    gap: 30px;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+  }
+
 }

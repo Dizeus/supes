@@ -11,10 +11,10 @@ function App() {
 
     const dispatch = useTypedDispatch()
     useEffect(()=>{
-        dispatch(getHeroes())
+        dispatch(getHeroes(page))
     },[])
 
-    const {modal} = useTypedSelector(state => state.heroReducer)
+    const {modal, page} = useTypedSelector(state => state.heroReducer)
 
     return (
         <div className="app">
