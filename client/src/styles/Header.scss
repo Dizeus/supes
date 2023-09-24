@@ -1,5 +1,6 @@
 .header {
-  background-color: skyblue;
+  background: linear-gradient(to top, skyblue, #c8ecff);
+  border-bottom: 5px solid white;
   &__container{
     display: flex;
     justify-content: space-between;

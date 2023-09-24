@@ -8,7 +8,10 @@
   padding: 50px 0;
   overflow: auto;
   &__form{
-    background-color: white;
+    background: linear-gradient(to top, #f7c264, #f7e8c7);
+    border: 5px solid black;
+    font-family: Verdana;
+    border-radius: 10px;
     position: relative;
     padding: 20px;
     width: 80%;
@@ -22,7 +25,12 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 10px;
+    margin-bottom: 15px;
+  }
+  &__input{
+    padding: 10px;
+    border: 2px solid black;
   }
   &__images{
     flex: 0 1 50%;

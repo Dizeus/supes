@@ -75,24 +75,27 @@ const Modal: React.FC<ModalProps> = ({modal}) => {
                     <div className='modal__body'>
                         <div className='modal__inputs'>
                             <label htmlFor="nickname">Nickname</label>
-                            <Field id="nickname" name="nickname" placeholder="nickname" />
+                            <Field className='modal__input' id="nickname" name="nickname" placeholder="nickname" />
 
                             <label htmlFor="real_name">Real Name</label>
-                            <Field id="real_name" name="real_name" placeholder="real_name" />
-                            <label htmlFor="superpowers">Superpowers</label>
+                            <Field className='modal__input' id="real_name" name="real_name" placeholder="real_name" />
+                            <label  htmlFor="superpowers">Superpowers</label>
                             <Field
+                                className='modal__input'
                                 id="superpowers"
                                 name="superpowers"
                                 placeholder="Superpowers"
                             />
                             <label htmlFor="phrase">Catch Phrase</label>
                             <Field
+                                className='modal__input'
                                 id="phrase"
                                 name="phrase"
                                 placeholder="Catch Phrase"
                             />
                             <label htmlFor="origin">Origin Description</label>
                             <Field
+                                className='modal__input'
                                 id="origin"
                                 name="origin"
                                 placeholder="Description"

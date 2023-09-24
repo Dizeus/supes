@@ -1,16 +1,19 @@
 
 .images{
   padding: 20px;
+  &__title{
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
   &__dropbox{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed lightgrey;
-    border-radius: 20px;
+    border: 2px dashed black;
     height: 220px;
     margin-bottom: 20px;
-    background: skyblue url('../assets/images/upload-bg.svg') center center no-repeat;
+    background: white url('../assets/images/upload-bg.svg') center center no-repeat;
     background-size: 100px;
   }
   &__hidden{
@@ -21,10 +24,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(50px, 80px));
     gap: 20px;
+    margin-bottom: 10px;
   }
   &__preview{
     position: relative;
     img{
+      border: 2px solid white;
       width: 100%;
       height: 100px;
       object-fit: cover;
