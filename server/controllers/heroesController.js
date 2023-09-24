@@ -2,14 +2,18 @@ const pool = require("../db");
 const uuid = require('uuid')
 const ApiError = require('../error/ApiError');
 const path = require("path");
-
+const fs = require('fs');
 function saveImages(pathArray, images){
+    const filePath = path.resolve(__dirname, '../static');
     (images.length?[...images]:[images]).map(async (image)=>{
+        if (!fs.existsSync(filePath)) {
+            fs.mkdirSync(filePath);
+        }
         const fileName = uuid.v4() + '.jpg'
-        await image.mv(path.resolve(__dirname, '../../client/build/images') + '\\'+ fileName)
-        console.log(path.resolve(__dirname, '../../client/build/images') + '\\'+ fileName)
+        await image.mv(filePath + '/' + fileName)
         console.log(fileName)
-        pathArray.push(path.resolve(__dirname, '../../client/build/images') + '\\'+ fileName)
+        console.log(filePath)
+        pathArray.push(`/${fileName}`)
     })
     return pathArray
 }
