@@ -37,13 +37,14 @@ class HeroesController {
                 return next(ApiError.badRequest('Incorrect data in request'))
             }
 
-            const newHero = await pool.query(`INSERT INTO heroes(id, nickname, real_name, origin, superpowers, phrase, images) VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, nickname, real_name, origin, superpowers, phrase, pathArray]);
+            await pool.query(`INSERT INTO heroes(id, nickname, real_name, origin, superpowers, phrase, images) VALUES($1,$2,$3,$4,$5,$6,$7)`, [id, nickname, real_name, origin, superpowers, phrase, pathArray]);
+
+            const newHero = await pool.query(`SELECT * FROM heroes WHERE id = $1;`, [id]);
 
             if (!newHero) {
                 return next(ApiError.internal('Hero was not created, something went wrong'))
             }
-
-            return res.json(newHero)
+            return res.json(newHero.rows[0])
         }catch (error){
             console.error(error)
         }

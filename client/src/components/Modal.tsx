@@ -4,6 +4,7 @@ import '../styles/Modal.scss'
 import {IHero} from "../types/hero";
 import {useTypedDispatch} from "../hooks/useTypedDispatch";
 import {createHero} from "../store/reducers/heroActionCreators";
+import UploadImage from "./UploadImage";
 
 interface ModalProps {
     hero?: IHero;
@@ -19,33 +20,17 @@ interface Values {
     phrase: string
 }
 const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
-    const dispatch = useTypedDispatch()
-    const filePicker = useRef<any>(null);
-    const [myFile, setMyFile] = useState<File[]>([]);
-    function dropHandler(event: any) {
-        event.preventDefault();
-        event.stopPropagation();
-        const files = event.dataTransfer?.files || event.target.files;
-        if (files[0] !== undefined) {
-            setMyFile(files)
-        }
-    }
-    function dragEnterHandler(event: any) {
-        event.preventDefault()
-        event.stopPropagation()
-    }
 
-    function dragLeaveHandler(event: any) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
+    const dispatch = useTypedDispatch()
+    const [myFiles, setMyFiles] = useState<File[]>([]);
+
     const empty = {
-        id: '',
-        nickname: '',
-        real_name: '',
-        origin: '',
-        superpowers: '',
-        phrase: '',
+        id: hero?.id || '',
+        nickname: hero?.nickname || '',
+        real_name: hero?.real_name || '',
+        origin: hero?.origin || '',
+        superpowers: hero?.superpowers || '',
+        phrase: hero?.phrase || '',
     }
     return (
         <div className={`modal${modal!=='none'?' modal_active':''}`}>
@@ -55,7 +40,6 @@ const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
                     values: Values,
                     { setSubmitting }: FormikHelpers<Values>
                 ) => {
-                    console.log(values)
                     let formData = new FormData()
                     formData.append('id', values.id)
                     formData.append('nickname', values.nickname)
@@ -63,16 +47,17 @@ const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
                     formData.append('origin', values.origin)
                     formData.append('superpowers', values.superpowers)
                     formData.append('phrase', values.phrase)
-                    console.log(myFile)
-                    for (let file of myFile){
+                    console.log(myFiles)
+                    for (let file of myFiles){
                         formData.append('images', file);
                     }
-                    console.log(formData)
+                    console.log(values)
                     dispatch(createHero(formData))
                     setSubmitting(false);
                 }}
             >
                 <Form className='modal__form'>
+                    <button onClick={()=>setModal('none')} className='modal__close'>&#10006;</button>
                     <div className='modal__body'>
                         <div className='modal__inputs'>
                             <label htmlFor="nickname">Nickname</label>
@@ -100,25 +85,7 @@ const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
                                 component='textarea'
                             />
                         </div>
-                        <div className='modal__images'>
-                            <input
-                                type="file"
-                                className='modal__hidden'
-                                ref={filePicker}
-                                multiple
-                                onChange={dropHandler}
-                                accept="image/*, .jpg"
-                            />
-                            <div
-                                onDrop={dropHandler}
-                                onClick={() => filePicker.current && filePicker.current.click()}
-                                onDragEnter={dragEnterHandler}
-                                onDragLeave={dragLeaveHandler}
-                                onDragOver={dragEnterHandler}
-                                className='modal__dropbox' >
-                        </div>
-                    </div>
-                        <button onClick={()=>setModal('none')} className='modal__close'>&#10006;</button>
+                        <UploadImage myFiles={myFiles} setMyFiles={setMyFiles}/>
                     </div>
                     <button className='myButton modal__submit' type="submit">{modal}</button>
                 </Form>
