@@ -4,7 +4,6 @@ const ApiError = require('../error/ApiError');
 const path = require("path");
 
 function saveImages(pathArray, images){
-    console.log('in SaveImages')
     (images.length?[...images]:[images]).map(async (image)=>{
         const fileName = uuid.v4() + '.jpg'
         await image.mv(path.resolve(__dirname, '..', 'static') + '\\'+ fileName)
