@@ -23,7 +23,7 @@ app.post('/api/heroes', heroController.addHero)
 app.put('/api/heroes', heroController.editHero)
 app.delete('/api/heroes/:id', heroController.deleteHero)
 
-/*app.get("*", (req, res) => {
+app.get("*", (req, res) => {
     res.sendFile('index.html', { root });
-})*/
+})
 app.listen(PORT, ()=>console.log(`Server Running on PORT ${PORT}`))

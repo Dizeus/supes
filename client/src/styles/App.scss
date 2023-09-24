@@ -15,7 +15,13 @@ ul li{list-style: none;}
 img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 /*--------------------*/
-body{
+#root, .app{
+  height: 100%;
+}
+.app{
+  font-family: verdana;
+  display: flex;
+  flex-direction: column;
 }
 .myButton {
   background-color: white;

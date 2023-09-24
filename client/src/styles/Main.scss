@@ -1,5 +1,7 @@
 .main{
   padding: 30px;
+  height: auto;
+  flex: 1 0 auto;
   background: radial-gradient(rgba(247, 232, 199, 0.59), #f7e8c7), url('../assets/images/background.jpg') top center/100% 100% no-repeat fixed;
   &__pagination{
     margin-bottom: 20px;
@@ -28,5 +30,9 @@
     align-content: space-evenly;
     align-items: center;
   }
-
+  &__message{
+    display: inline-block;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.52);
+  }
 }

@@ -11,9 +11,6 @@ function saveImages(pathArray, images){
         }
         const fileName = uuid.v4() + '.jpg'
         await image.mv(filePath + '/' + fileName)
-        console.log(fileName)
-        console.log(filePath)
-        console.log(path.resolve(__dirname, `../${fileName}`));
         pathArray.push(`/${fileName}`)
     })
     return pathArray
