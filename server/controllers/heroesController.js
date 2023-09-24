@@ -13,7 +13,7 @@ function saveImages(pathArray, images){
         await image.mv(filePath + '/' + fileName)
         console.log(fileName)
         console.log(filePath)
-        console.log(path.resolve(__dirname, `../${filename}`));
+        console.log(path.resolve(__dirname, `../${fileName}`));
         pathArray.push(`/${fileName}`)
     })
     return pathArray
