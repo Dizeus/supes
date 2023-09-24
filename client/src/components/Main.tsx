@@ -4,8 +4,10 @@ import Card from "./Card";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import '../styles/Main.scss'
 
+interface MainProps {
 
-const Main = () => {
+}
+const Main: React.FC<MainProps> = () => {
 
     const {heroes} = useTypedSelector(state=>state.heroReducer)
 

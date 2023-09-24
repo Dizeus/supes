@@ -20,7 +20,7 @@ app.use(errorHandler)
 
 app.get('/api/heroes', heroController.getAllHeroes)
 app.post('/api/heroes', heroController.addHero)
-app.put('/api/heroes/:id', heroController.editHero)
+app.put('/api/heroes', heroController.editHero)
 app.delete('/api/heroes/:id', heroController.deleteHero)
 
 app.get("*", (req, res) => {

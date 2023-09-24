@@ -5,18 +5,21 @@ import Main from "./components/Main";
 import {getHeroes} from "./store/reducers/heroActionCreators";
 import {useTypedDispatch} from "./hooks/useTypedDispatch";
 import Modal from "./components/Modal";
+import {setModal} from "./store/reducers/heroSlice";
+import {useTypedSelector} from "./hooks/useTypedSelector";
 function App() {
 
-    const [modal, setModal] = useState<string>('none')
     const dispatch = useTypedDispatch()
     useEffect(()=>{
         dispatch(getHeroes())
     },[])
 
+    const {modal} = useTypedSelector(state => state.heroReducer)
+
     return (
         <div className="app">
-            <Modal setModal={setModal}  modal={modal}/>
-           <Header setModal={setModal}/>
+            {modal !== 'none' && <Modal modal={modal}/>}
+           <Header/>
            <Main/>
 
         </div>

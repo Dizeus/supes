@@ -5,23 +5,30 @@ import del from '../assets/icons/delete.svg';
 import edit from '../assets/icons/edit.svg';
 import ret from '../assets/icons/return.svg';
 import {useTypedDispatch} from "../hooks/useTypedDispatch";
-import {deleteHero} from "../store/reducers/heroSlice";
 import {removeHero} from "../store/reducers/heroActionCreators";
+import {setCurrentHero, setModal} from "../store/reducers/heroSlice";
+import Modal from "./Modal";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 interface BackCardProps{
     hero: IHero,
-    setActive: (active: boolean) => void
+    setActive: (active: boolean) => void,
 }
 const BackCard: React.FC<BackCardProps> = ({hero, setActive}) => {
     const [slide, setSlide] = useState<number>(0)
     const dispatch = useTypedDispatch()
+
+    const openEdit = () =>{
+        dispatch(setModal('edit'))
+        dispatch(setCurrentHero(hero))
+    }
+
     return (
         <div className="card__back back">
-
             <button disabled={slide===0} className='back__prev' onClick={()=>setSlide(slide-1)}>&#x2039;</button>
             <button disabled={slide===hero.images.length-1} className='back__next' onClick={()=>setSlide(slide+1)}>&#x203A;</button>
             <div className='back__buttons'>
                 <img onClick={()=>setActive(false)} src={ret} className='back_return'/>
-                <img src={edit} onClick={()=>setActive} className='back_edit'/>
+                <img src={edit} onClick={openEdit} className='back_edit'/>
                 <img src={del} onClick={()=>dispatch(removeHero(hero.id))} className='back_delete'/>
             </div>
             <img className='back__img' src={hero.images[slide]} alt="hero"/>

@@ -1,12 +1,12 @@
 import {api} from "../../api/api";
 import {AppDispatch} from "../store";
-import {setHeroes, addHero, deleteHero} from "./heroSlice";
+import {setHeroes, addHero, deleteHero, updateHero} from "./heroSlice";
 
 export const getHeroes = () => async (dispatch: AppDispatch) =>{
     try {
         const response = await api.getHeroes()
         if(response?.status == 200){
-            dispatch(setHeroes(response.data))
+            dispatch(setHeroes(response.data.reverse()))
         }
     } catch (e) {
         console.error(e)
@@ -23,7 +23,16 @@ export const createHero = (hero: FormData) => async (dispatch: AppDispatch) =>{
         console.error(e)
     }
 }
-
+export const editHero = (hero: FormData) => async (dispatch: AppDispatch) =>{
+    try {
+        const response = await api.editHero(hero)
+        if(response?.status == 200){
+            dispatch(updateHero(response.data))
+        }
+    } catch (e) {
+        console.error(e)
+    }
+}
 export const removeHero = (id: string) => async (dispatch: AppDispatch) =>{
     try {
         const response = await api.deleteHero(id)

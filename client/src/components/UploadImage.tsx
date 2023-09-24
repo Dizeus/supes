@@ -3,8 +3,9 @@ import '../styles/UploadImage.scss'
 interface UploadImageProps{
     myFiles: File[];
     setMyFiles: (myFiles: File[])=>void;
+    old_images?: string[];
 }
-const UploadImage: React.FC<UploadImageProps> = ({setMyFiles, myFiles}) => {
+const UploadImage: React.FC<UploadImageProps> = ({setMyFiles, myFiles, old_images}) => {
 
      const filePicker = useRef<any>(null);
     const [previewUrl, setPreviewUrl] = useState<string[]>([]);
@@ -45,7 +46,15 @@ const UploadImage: React.FC<UploadImageProps> = ({setMyFiles, myFiles}) => {
                  onChange={dropHandler}
                  accept="image/*, .jpg"
              />
+             <div className='images__new'>{old_images?.map((url, i)=>
+                 <div key={i} className={'images__preview'}>
+                     <img
+                         src={url}
+                         alt="oops"/>
+                 </div>
+             )}</div>
              <div className='images__title'>Upload a .jpg images of hero </div>
+
              <div
                  onDrop={dropHandler}
                  onClick={() => filePicker?.current && filePicker.current.click()}

@@ -20,9 +20,9 @@ export const api = {
             console.error(err)
         }
     },
-    async updateHero(hero: IHero, id: string) {
+    async editHero(hero: FormData) {
         try {
-            const response = await axios.put<IHero>(`/api/heroes/${id}`, hero)
+            const response = await axios.put<IHero>(`/api/heroes`, hero)
             console.log(response.data)
             return response
         } catch (err) {

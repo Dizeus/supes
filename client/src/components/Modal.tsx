@@ -1,15 +1,14 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Field, Form, Formik, FormikHelpers} from "formik";
 import '../styles/Modal.scss'
-import {IHero} from "../types/hero";
 import {useTypedDispatch} from "../hooks/useTypedDispatch";
-import {createHero} from "../store/reducers/heroActionCreators";
+import {createHero, editHero} from "../store/reducers/heroActionCreators";
 import UploadImage from "./UploadImage";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {setCurrentHero, setModal, updateHero} from "../store/reducers/heroSlice";
 
 interface ModalProps {
-    hero?: IHero;
     modal: string,
-    setModal: (modal: string)=>void
 }
 interface Values {
     id: string;
@@ -19,12 +18,12 @@ interface Values {
     superpowers: string,
     phrase: string
 }
-const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
+const Modal: React.FC<ModalProps> = ({modal}) => {
 
     const dispatch = useTypedDispatch()
+    const hero = useTypedSelector(state => state.heroReducer.currentHero)
     const [myFiles, setMyFiles] = useState<File[]>([]);
-
-    const empty = {
+    const initial = {
         id: hero?.id || '',
         nickname: hero?.nickname || '',
         real_name: hero?.real_name || '',
@@ -32,32 +31,47 @@ const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
         superpowers: hero?.superpowers || '',
         phrase: hero?.phrase || '',
     }
+
+    const closeModal = ()=>{
+       dispatch(setModal('none'))
+        modal==='edit' && dispatch(setCurrentHero(null))
+
+    }
+
+    const sendForm = (values: Values) =>{
+        let formData = new FormData()
+        formData.append('id', values.id)
+        formData.append('nickname', values.nickname)
+        formData.append('real_name', values.real_name)
+        formData.append('origin', values.origin)
+        formData.append('superpowers', values.superpowers)
+        formData.append('phrase', values.phrase)
+        formData.append('old_images', JSON.stringify(hero?.images) || '')
+        for (let file of myFiles){
+            formData.append('images', file);
+        }
+        if(modal==='add'){
+            dispatch(createHero(formData))
+        }else {
+            dispatch(editHero(formData))
+        }
+        dispatch(setModal('none'))
+    }
+
     return (
-        <div className={`modal${modal!=='none'?' modal_active':''}`}>
+        <div className='modal'>
             <Formik
-                initialValues={empty}
+                initialValues={initial}
                 onSubmit={(
                     values: Values,
                     { setSubmitting }: FormikHelpers<Values>
                 ) => {
-                    let formData = new FormData()
-                    formData.append('id', values.id)
-                    formData.append('nickname', values.nickname)
-                    formData.append('real_name', values.real_name)
-                    formData.append('origin', values.origin)
-                    formData.append('superpowers', values.superpowers)
-                    formData.append('phrase', values.phrase)
-                    console.log(myFiles)
-                    for (let file of myFiles){
-                        formData.append('images', file);
-                    }
-                    console.log(values)
-                    dispatch(createHero(formData))
+                    sendForm(values)
                     setSubmitting(false);
                 }}
             >
                 <Form className='modal__form'>
-                    <button onClick={()=>setModal('none')} className='modal__close'>&#10006;</button>
+                    <button type='button' onClick={closeModal} className='modal__close'>&#10006;</button>
                     <div className='modal__body'>
                         <div className='modal__inputs'>
                             <label htmlFor="nickname">Nickname</label>
@@ -85,7 +99,7 @@ const Modal: React.FC<ModalProps> = ({modal, setModal, hero}) => {
                                 component='textarea'
                             />
                         </div>
-                        <UploadImage myFiles={myFiles} setMyFiles={setMyFiles}/>
+                        <UploadImage old_images={hero?.images} myFiles={myFiles} setMyFiles={setMyFiles}/>
                     </div>
                     <button className='myButton modal__submit' type="submit">{modal}</button>
                 </Form>
