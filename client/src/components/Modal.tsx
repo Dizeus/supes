@@ -70,7 +70,7 @@ const Modal: React.FC<ModalProps> = ({modal}) => {
                     setSubmitting(false);
                 }}
             >
-                <Form className='modal__form'>
+                <Form data-testid='modal' className='modal__form'>
                     <button type='button' onClick={closeModal} className='modal__close'>&#10006;</button>
                     <div className='modal__body'>
                         <div className='modal__inputs'>

@@ -2,19 +2,20 @@ import {render, screen} from "@testing-library/react";
 import App from "../App";
 import React from "react";
 import Main from "./Main";
+import {Provider} from "react-redux";
+import {setupStore} from "../store/store";
 
-describe('test apis', () => {
+describe('Test Main', () => {
 
-    test('renders App correct', async () => {
-        render(<Main />);
+    test('Main empty', () => {
+        render(
+            <Provider store={setupStore()}>
+                <Main />
+            </Provider>);
         const main = screen.getByTestId('main');
         expect(main).toBeInTheDocument();
-        screen.debug()
-        const heroes = await screen.findAllByTestId('heroCard')
-        expect(heroes.length).toBe(2);
-        screen.debug()
-        const addButton = screen.getByText(/add hero/i);
-        expect(addButton).toBeInTheDocument();
+        const noHeroes = screen.getByText(/There is no heroes yet/i);
+        expect(noHeroes).toBeInTheDocument();
     });
 
 })

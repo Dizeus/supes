@@ -18,10 +18,9 @@ function App() {
 
     return (
         <div className="app">
-            {modal !== 'none' && <Modal modal={modal}/>}
+            {modal !== 'none' && <Modal  modal={modal}/>}
            <Header/>
            <Main/>
-
         </div>
 );
 }
