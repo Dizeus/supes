@@ -1,4 +1,4 @@
-import React, {LegacyRef, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '../styles/UploadImage.scss'
 interface UploadImageProps{
     myFiles: File[];
@@ -8,7 +8,13 @@ interface UploadImageProps{
 const UploadImage: React.FC<UploadImageProps> = ({setMyFiles, myFiles, old_images}) => {
 
      const filePicker = useRef<any>(null);
-    const [previewUrl, setPreviewUrl] = useState<string[]>([]);
+     const [previewUrl, setPreviewUrl] = useState<string[]>([]);
+
+     useEffect(()=>{
+         return () =>{
+             previewUrl.map(url=>URL.revokeObjectURL(url))
+         }
+     })
      function dropHandler(event: any) {
          event.preventDefault();
          event.stopPropagation();

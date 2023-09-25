@@ -1,8 +1,6 @@
 import React from 'react';
 import '../styles/Header.scss'
-import Modal from "./Modal";
 import {useTypedDispatch} from "../hooks/useTypedDispatch";
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import {setModal} from "../store/reducers/heroSlice";
 
 

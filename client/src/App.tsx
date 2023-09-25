@@ -5,7 +5,6 @@ import Main from "./components/Main";
 import {getHeroes} from "./store/reducers/heroActionCreators";
 import {useTypedDispatch} from "./hooks/useTypedDispatch";
 import Modal from "./components/Modal";
-import {setModal} from "./store/reducers/heroSlice";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 function App() {
 
@@ -18,7 +17,7 @@ function App() {
 
     return (
         <div className="app">
-            {modal !== 'none' && <Modal  modal={modal}/>}
+            {modal !== 'none' && <Modal/>}
            <Header/>
            <Main/>
         </div>

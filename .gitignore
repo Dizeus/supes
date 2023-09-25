@@ -10,7 +10,10 @@ node_modules/
 
 # production
 /build
-static/*
+server/static/*
+# exception to the rule
+!server/static/.gitkeep
+
 # misc
 .DS_Store
 .env

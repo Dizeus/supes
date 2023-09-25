@@ -1,5 +1,4 @@
 import React from 'react';
-import {IHero} from "../types/hero";
 import Card from "./Card";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import '../styles/Main.scss'
@@ -7,10 +6,7 @@ import {useTypedDispatch} from "../hooks/useTypedDispatch";
 import {setPage} from "../store/reducers/heroSlice";
 import {getHeroes} from "../store/reducers/heroActionCreators";
 
-interface MainProps {
-
-}
-const Main: React.FC<MainProps> = () => {
+const Main= () => {
 
     const {heroes, totalPages, page} = useTypedSelector(state=>state.heroReducer)
     const dispatch = useTypedDispatch()

@@ -5,11 +5,8 @@ import {useTypedDispatch} from "../hooks/useTypedDispatch";
 import {createHero, editHero} from "../store/reducers/heroActionCreators";
 import UploadImage from "./UploadImage";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {setCurrentHero, setModal, updateHero} from "../store/reducers/heroSlice";
+import {setCurrentHero, setModal} from "../store/reducers/heroSlice";
 
-interface ModalProps {
-    modal: string,
-}
 interface Values {
     id: string;
     nickname: string,
@@ -18,18 +15,18 @@ interface Values {
     superpowers: string,
     phrase: string
 }
-const Modal: React.FC<ModalProps> = ({modal}) => {
+const Modal = () => {
 
     const dispatch = useTypedDispatch()
-    const hero = useTypedSelector(state => state.heroReducer.currentHero)
+    const {currentHero , modal} = useTypedSelector(state => state.heroReducer)
     const [myFiles, setMyFiles] = useState<File[]>([]);
     const initial = {
-        id: hero?.id || '',
-        nickname: hero?.nickname || '',
-        real_name: hero?.real_name || '',
-        origin: hero?.origin || '',
-        superpowers: hero?.superpowers || '',
-        phrase: hero?.phrase || '',
+        id: currentHero?.id || '',
+        nickname: currentHero?.nickname || '',
+        real_name: currentHero?.real_name || '',
+        origin: currentHero?.origin || '',
+        superpowers: currentHero?.superpowers || '',
+        phrase: currentHero?.phrase || '',
     }
 
     const closeModal = ()=>{
@@ -46,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({modal}) => {
         formData.append('origin', values.origin)
         formData.append('superpowers', values.superpowers)
         formData.append('phrase', values.phrase)
-        formData.append('old_images', JSON.stringify(hero?.images) || '')
+        formData.append('old_images', JSON.stringify(currentHero?.images) || '')
         for (let file of myFiles){
             formData.append('images', file);
         }
@@ -75,34 +72,34 @@ const Modal: React.FC<ModalProps> = ({modal}) => {
                     <div className='modal__body'>
                         <div className='modal__inputs'>
                             <label htmlFor="nickname">Nickname</label>
-                            <Field className='modal__input' id="nickname" name="nickname" placeholder="nickname" />
+                            <Field className='modal__input' id="nickname" name="nickname" placeholder="Superman..." />
 
                             <label htmlFor="real_name">Real Name</label>
-                            <Field className='modal__input' id="real_name" name="real_name" placeholder="real_name" />
+                            <Field className='modal__input' id="real_name" name="real_name" placeholder="Clark Kent..." />
                             <label  htmlFor="superpowers">Superpowers</label>
                             <Field
                                 className='modal__input'
                                 id="superpowers"
                                 name="superpowers"
-                                placeholder="Superpowers"
+                                placeholder="Lazers..."
                             />
                             <label htmlFor="phrase">Catch Phrase</label>
                             <Field
                                 className='modal__input'
                                 id="phrase"
                                 name="phrase"
-                                placeholder="Catch Phrase"
+                                placeholder="Look in the sky..."
                             />
                             <label htmlFor="origin">Origin Description</label>
                             <Field
                                 className='modal__input'
                                 id="origin"
                                 name="origin"
-                                placeholder="Description"
+                                placeholder="Cripton - planet..."
                                 component='textarea'
                             />
                         </div>
-                        <UploadImage old_images={hero?.images} myFiles={myFiles} setMyFiles={setMyFiles}/>
+                        <UploadImage old_images={currentHero?.images} myFiles={myFiles} setMyFiles={setMyFiles}/>
                     </div>
                     <button className='myButton modal__submit' type="submit">{modal}</button>
                 </Form>

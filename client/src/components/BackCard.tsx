@@ -7,8 +7,6 @@ import ret from '../assets/icons/return.svg';
 import {useTypedDispatch} from "../hooks/useTypedDispatch";
 import {removeHero} from "../store/reducers/heroActionCreators";
 import {setCurrentHero, setModal} from "../store/reducers/heroSlice";
-import Modal from "./Modal";
-import {useTypedSelector} from "../hooks/useTypedSelector";
 interface BackCardProps{
     hero: IHero,
     setActive: (active: boolean) => void,
