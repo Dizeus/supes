@@ -4,8 +4,13 @@
   &__container{
     display: flex;
     justify-content: space-between;
+    row-gap: 20px;
     align-items: center;
-    height: 90px;
+    padding: 20px;
+    @media (max-width:599.98px) {
+      flex-direction: column;
+      padding: 20px;
+    }
   }
   &__supes {
       text-transform: uppercase;
