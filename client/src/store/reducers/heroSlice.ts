@@ -11,7 +11,15 @@ interface HeroState {
 }
 
 const initialState: HeroState = {
-    heroes: [],
+    heroes: [{
+        id: "b4ad176c-c279-4498-a638-30ddb0baf6b4",
+        nickname: "Batman",
+        real_name: "Bruce Wayne",
+        origin: "Gotham - Babylon of criminal world",
+        phrase: "I am Vengeance",
+        superpowers: "Money, ninja",
+        images: ['exampleImages/batman1.jpg', 'exampleImages/batman2.jpg']
+    }],
     modal: 'none',
     currentHero: null,
     totalPages: 0,
@@ -23,7 +31,7 @@ export const heroSlice = createSlice({
     initialState,
     reducers: {
         setHeroes(state, action: PayloadAction<IHero[]>){
-            state.heroes = action.payload
+            state.heroes = [...state.heroes, ...action.payload]
         },
         addHero(state,action: PayloadAction<IHero> ){
             state.heroes.push(action.payload)
