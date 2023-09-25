@@ -12,7 +12,9 @@ const Main= () => {
     const dispatch = useTypedDispatch()
 
     const onClickPage = (n: number)=>{
-        dispatch(setPage(n))
+        if(page!=n) {
+            dispatch(setPage(n))
+        }
         dispatch(getHeroes(n))
     }
     return (
@@ -20,7 +22,7 @@ const Main= () => {
             {heroes.length > 0?
                 <>
                     <div className='main__pagination'>
-                        {[...Array(totalPages)].map((x, i) =>
+                        {totalPages>1 && [...Array(totalPages)].map((x, i) =>
                             <div key={i+1} className={`main__page${page==1+i?' main__page_active': ''}`} onClick={()=>onClickPage(i+1)}>{i+1}</div>
                         )}
                     </div>
