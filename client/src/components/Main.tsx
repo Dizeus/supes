@@ -10,7 +10,6 @@ const Main= () => {
 
     const {heroes, totalPages, page} = useTypedSelector(state=>state.heroReducer)
     const dispatch = useTypedDispatch()
-
     const onClickPage = (n: number)=>{
         if(page!=n) {
             dispatch(setPage(n))
@@ -21,11 +20,15 @@ const Main= () => {
         <div data-testid='main' className='main'>
             {heroes.length > 0?
                 <>
-                    <div className='main__pagination'>
-                        {totalPages>1 && [...Array(totalPages)].map((x, i) =>
-                            <div key={i+1} className={`main__page${page==1+i?' main__page_active': ''}`} onClick={()=>onClickPage(i+1)}>{i+1}</div>
-                        )}
-                    </div>
+                    {
+                        totalPages > 1 &&
+                        <div className='main__pagination' data-testid='pagination'>
+                            {[...Array(totalPages)].map((x, i) =>
+                                <div data-testid='pagination-page' key={i + 1} className={`main__page${page == 1 + i ? ' main__page_active' : ''}`}
+                                     onClick={() => onClickPage(i + 1)}>{i + 1}</div>
+                            )}
+                        </div>
+                    }
                     <div className='main__cards'>
                         {heroes.map(hero=><Card key={hero.id} hero={hero}/>)}
                     </div>

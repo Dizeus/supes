@@ -12,7 +12,7 @@ const FrontCard : React.FC<FrontCardProps> = ({hero, setActive}) => {
                  src={hero.images[0]}
                  alt="hero image"/>
             <h2 className='front__title'>{hero.nickname}</h2>
-            <button onClick={()=>setActive(true)} className='myButton myButton_card'>View More</button>
+            <button data-testid='viewMore' onClick={()=>setActive(true)} className='myButton myButton_card'>View More</button>
         </div>
     );
 };

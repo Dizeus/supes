@@ -11,7 +11,7 @@ const Card: React.FC<CardProps> = ({hero}) => {
     const [active, setActive] = useState(false)
     return (
         <div data-testid='heroCard' className="card">
-            <div className={`card__body${active?' card__body_active':''}`}>
+            <div data-testid='heroCardBody' className={`card__body${active?' card__body_active':''}`}>
                     <FrontCard hero={hero} setActive={setActive}/>
                     <BackCard hero={hero} setActive={setActive}/>
             </div>

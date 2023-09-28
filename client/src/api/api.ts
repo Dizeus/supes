@@ -25,7 +25,7 @@ export const api = {
     },
     async deleteHero(id: string) {
         try {
-            return await axios.delete<IHero>(`/api/heroes/${id}`)
+            return await axios.delete<string>(`/api/heroes/${id}`)
         } catch (err) {
             console.error(err)
         }
