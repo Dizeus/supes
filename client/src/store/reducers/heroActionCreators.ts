@@ -40,7 +40,6 @@ export const removeHero = (id: string) => async (dispatch: AppDispatch) =>{
         if(response?.status == 200){
             dispatch(deleteHero(id))
         }
-
     } catch (e) {
         console.error(e)
     }

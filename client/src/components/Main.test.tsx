@@ -109,7 +109,7 @@ describe('Test Main', () => {
         expect(heroes.length).toBe(1);
     });
 
-    test('Main with pagination', () => {
+    test('Main with pagination', async () => {
 
         render(
             <Provider store={setupStore(initialStateMultiple)}>
@@ -119,7 +119,11 @@ describe('Test Main', () => {
         const page = screen.getAllByTestId('pagination-page')
         expect(pagination).toBeInTheDocument()
         expect(page[0].className).toBe('main__page main__page_active');
-        userEvent.click(page[1])
+        act(() => {
+            userEvent.click(page[1])
+        });
+        expect((await screen.findAllByTestId('pagination-page'))[0].className).toBe('main__page');
+        expect((await screen.findAllByTestId('pagination-page'))[1].className).toBe('main__page main__page_active');
         expect(page.length).toBe(2)
         const heroes = screen.getAllByTestId('heroCard');
         expect(heroes.length).toBe(6);
@@ -136,12 +140,11 @@ describe('Test Main', () => {
             fireEvent.click(viewMore[0])
         });
         const del = screen.getAllByTestId('delete')
-
         act(() => {
             fireEvent.click(del[0])
         });
-        await new Promise((r) => setTimeout(r, 2000));
-        expect(screen.queryAllByTestId('heroCard').length).toBe(5)
+        await new Promise((r) => setTimeout(r, 50));
+        expect((await screen.findAllByTestId('heroCard')).length).toBe(5)
 
     });
 })

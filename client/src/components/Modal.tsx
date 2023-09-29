@@ -68,7 +68,7 @@ const Modal = () => {
                 }}
             >
                 <Form data-testid='modal' className='modal__form'>
-                    <button type='button' onClick={closeModal} className='modal__close'>&#10006;</button>
+                    <button type='button' onClick={closeModal} data-testid='closeModal' className='modal__close'>&#10006;</button>
                     <div className='modal__body'>
                         <div className='modal__inputs'>
                             <label htmlFor="nickname">Nickname</label>
